@@ -92,7 +92,7 @@ export default function App() {
         <Route path="/services/visa-support"                    element={<VisaSupportPage />} />
         <Route path="/services/sop-support"                     element={<SopSupportPage />} />
         <Route path="/services/dedicated-counselor"             element={<DedicatedCounselorPage />} />
-        <Route path="/services/:serviceSlug"                    element={<ServiceDetail />} />
+        <Rote path="/services/:serviceSlug"                    element={<ServiceDetail />} />
 
         
         <Route path="/exam-prep"          element={<ExamPrepPage />} />
