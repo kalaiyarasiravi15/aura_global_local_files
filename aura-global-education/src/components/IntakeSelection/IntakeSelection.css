@@ -1,0 +1,607 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+/* ══════════════════════════════════════════
+   INTAKE SELECTION — FULL PAGE PREMIUM CSS
+   ══════════════════════════════════════════ */
+
+:root {
+  --navy:          #1a2558;
+  --navy-dark:     #111a3e;
+  --navy-light:    #e8ecf8;
+  --gold:          #c9a84c;
+  --gold-light:    #e2c37a;
+  --gold-faint:    #f7f3ea;
+  --white:         #ffffff;
+  --text-muted:    #888899;
+  --border-light:  rgba(26, 37, 88, 0.09);
+
+  --shadow-card:   0 8px 32px rgba(26, 37, 88, 0.07), 0 2px 8px rgba(26, 37, 88, 0.04);
+  --shadow-hover:  0 28px 60px rgba(17, 26, 62, 0.18), 0 8px 24px rgba(17, 26, 62, 0.1);
+  --shadow-gold:   0 0 0 3px rgba(201, 168, 76, 0.22);
+
+  --font-display:  'Cormorant Garamond', Georgia, serif;
+  --font-body:     'DM Sans', system-ui, sans-serif;
+  --ease-out:      cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth:   cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Full-page section wrapper ── */
+.intake-section {
+  min-height: calc(100vh - 80px - 60px);
+  background: var(--gold-faint);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 10% 0%,   rgba(201,168,76,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 90% 100%,  rgba(26,37,88,0.06)  0%, transparent 60%);
+  padding: 5rem 2rem 7rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.intake-container {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+/* ══ HEADER BLOCK ══ */
+.intake-header-wrapper {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+/* Eyebrow label above title */
+.intake-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.4rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.intake-eyebrow.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.intake-eyebrow::before,
+.intake-eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 1.5px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+
+/* Main animated title */
+.intake-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 6vw, 3.8rem);
+  font-weight: 700;
+  /* FIX: no !important — allows .is-gold to apply its color freely */
+  color: var(--navy-dark);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0 0.28em;
+  line-height: 1.15;
+}
+
+.intake-word {
+  display: inline-block;
+  overflow: hidden;
+}
+
+/* ── FIX: CSS fallback animation so words always appear
+   even if the IntersectionObserver fires before refs are ready.
+   JS observer overrides this with per-word staggered delays via
+   inline style when it works correctly. ── */
+.intake-word-inner {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  line-height: 1.25;
+  /* Fallback: reveal automatically after a short delay */
+  animation: intakeWordReveal 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
+
+.intake-word-inner.is-gold {
+  color: var(--gold);
+  font-style: italic;
+}
+
+/* Animated gold divider */
+.intake-divider {
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  border-radius: 4px;
+  margin: 1.4rem auto 0;
+  transition: width 0.8s var(--ease-out);
+}
+
+.intake-divider.is-visible {
+  width: 90px;
+}
+
+/* Subtitle */
+.intake-section-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin: 1.4rem auto 0;
+  max-width: 480px;
+  line-height: 1.7;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s ease 0.55s, transform 0.7s ease 0.55s;
+}
+
+.intake-section-subtitle.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ══ 3-COLUMN CARD GRID ══ */
+.intake-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 100%;
+  align-items: stretch;
+}
+
+/* ══ CARD LABEL WRAPPER ══ */
+.intake-interactive-card {
+  position: relative;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(48px) scale(0.95);
+  display: flex;
+  flex-direction: column;
+}
+
+.intake-interactive-card.is-visible {
+  animation: intakeCardPullUp 0.8s var(--ease-smooth) forwards;
+}
+
+.intake-hidden-radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+/* ══ CARD UI SHELL ══ */
+.intake-card-ui {
+  position: relative;
+  background: var(--white);
+  border: 1.5px solid var(--border-light);
+  border-radius: 22px;
+  padding: 2.6rem 2rem 2.4rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+  transition:
+    transform     0.4s var(--ease-out),
+    box-shadow    0.4s ease,
+    border-color  0.35s ease;
+  box-sizing: border-box;
+}
+
+/* Dark navy sweep on hover/checked */
+.intake-card-ui::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, var(--navy) 0%, var(--navy-dark) 100%);
+  transform: translateY(102%);
+  transition: transform 0.5s var(--ease-out);
+  z-index: 1;
+  border-radius: 22px;
+}
+
+/* Gold border reveal ring */
+.intake-card-accent-border {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--gold);
+  border-radius: 22px;
+  clip-path: circle(0% at 50% 100%);
+  transition: clip-path 0.6s var(--ease-out);
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* ── Season tag (top-left) ── */
+.intake-season-tag {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 5;
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  border-radius: 7px;
+  padding: 5px 11px;
+  font-family: var(--font-body);
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--gold);
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ── Giant watermark icon ── */
+.intake-giant-bg-icon {
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  font-size: 8.5rem;
+  color: var(--navy-light);
+  opacity: 0.18;
+  z-index: 2;
+  transition: transform 0.5s ease, color 0.4s ease, opacity 0.4s ease;
+  pointer-events: none;
+  line-height: 1;
+}
+
+/* ── Content block (centred) ── */
+.intake-content-box {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  justify-content: center;
+  padding-top: 1.5rem;
+}
+
+/* ── Icon circle ── */
+.intake-icon-frame {
+  font-size: 2rem;
+  background: var(--navy-light);
+  color: white;
+  width: 76px;
+  height: 76px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-bottom: 1.6rem;
+  position: relative;
+  flex-shrink: 0;
+  transition:
+    transform      0.35s var(--ease-out),
+    background     0.35s ease,
+    color          0.35s ease,
+    box-shadow     0.35s ease;
+}
+
+/* Gold ring pulse on hover/checked */
+.intake-icon-frame::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity 0.4s ease, transform 0.4s var(--ease-spring);
+}
+
+/* ── Card text ── */
+.intake-card-name {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0 0 0.7rem;
+  transition: color 0.3s ease;
+  line-height: 1.2;
+}
+
+.intake-timeline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(26,37,88,0.05);
+  border-radius: 50px;
+  padding: 5px 14px;
+  color: var(--text-muted);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.calendar-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.intake-card-date {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* ── Checkmark badge (top-right) ── */
+.intake-selected-badge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 1.5rem;
+  color: var(--gold);
+  opacity: 0;
+  transform: scale(0.4) rotate(-45deg);
+  transition: opacity 0.3s ease, transform 0.4s var(--ease-spring);
+  z-index: 5;
+}
+
+/* ══ LOADING / EMPTY ══ */
+.loading-spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  gap: 1rem;
+  font-family: var(--font-body);
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.loading-spinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid #e8eaf0;
+  border-top-color: var(--navy);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.no-data-message {
+  text-align: center;
+  padding: 4rem 2rem;
+  font-family: var(--font-body);
+  color: var(--text-muted);
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.back-button {
+  margin-top: 0.5rem;
+  padding: 0.6rem 1.4rem;
+  background: var(--navy);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.back-button:hover {
+  background: var(--navy-dark);
+}
+
+/* ══ HOVER STATES ══ */
+.intake-interactive-card:hover .intake-card-ui {
+  transform: translateY(-12px);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(201,168,76,0.4);
+}
+
+.intake-interactive-card:hover .intake-card-ui::before {
+  transform: translateY(0);
+}
+
+.intake-interactive-card:hover .intake-giant-bg-icon {
+  transform: scale(1.25) rotate(18deg);
+  color: var(--gold);
+  opacity: 0.1;
+}
+
+.intake-interactive-card:hover .intake-icon-frame {
+  transform: scale(1.06);
+  background: rgba(255,255,255,0.18);
+  color: var(--white);
+  box-shadow: 0 0 0 6px rgba(201,168,76,0.2);
+}
+
+.intake-interactive-card:hover .intake-icon-frame::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.intake-interactive-card:hover .intake-card-name {
+  color: var(--white);
+}
+
+.intake-interactive-card:hover .intake-timeline {
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.75);
+}
+
+.intake-interactive-card:hover .intake-season-tag {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--navy-dark);
+}
+
+/* ══ CHECKED / SELECTED STATES ══ */
+.intake-interactive-card.card-checked .intake-card-ui {
+  border-color: var(--gold);
+  box-shadow: var(--shadow-hover), var(--shadow-gold);
+  transform: translateY(-12px);
+}
+
+.intake-interactive-card.card-checked .intake-card-ui::before {
+  transform: translateY(0);
+}
+
+.intake-interactive-card.card-checked .intake-card-accent-border {
+  clip-path: circle(150% at 50% 100%);
+}
+
+.intake-interactive-card.card-checked .intake-giant-bg-icon {
+  color: var(--gold);
+  opacity: 0.12;
+  transform: scale(1.25) rotate(18deg);
+}
+
+.intake-interactive-card.card-checked .intake-icon-frame {
+  background: var(--gold);
+  color: var(--navy-dark);
+  box-shadow: 0 0 0 6px rgba(201,168,76,0.25);
+}
+
+.intake-interactive-card.card-checked .intake-icon-frame::after {
+  opacity: 1;
+  transform: scale(1);
+  border-color: rgba(255,255,255,0.5);
+}
+
+.intake-interactive-card.card-checked .intake-card-name {
+  color: var(--white);
+}
+
+.intake-interactive-card.card-checked .intake-timeline {
+  background: rgba(255,255,255,0.12);
+  color: var(--gold-light);
+}
+
+.intake-interactive-card.card-checked .intake-selected-badge {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.intake-interactive-card.card-checked .intake-season-tag {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--navy-dark);
+}
+
+/* ══ BOTTOM HINT ROW ══ */
+.intake-hint-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 3rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease 1s, transform 0.6s ease 1s;
+}
+
+.intake-hint-row.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.intake-hint-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.7;
+}
+
+/* ══ KEYFRAMES ══ */
+@keyframes intakeWordReveal {
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes intakeCardPullUp {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width: 1024px) {
+  .intake-grid-layout {
+    gap: 1.6rem;
+  }
+  .intake-card-ui {
+    min-height: 300px;
+    padding: 2.2rem 1.6rem 2rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .intake-grid-layout {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.4rem;
+  }
+
+  .intake-interactive-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 420px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .intake-section {
+    padding: 4rem 1.2rem 5rem;
+  }
+
+  .intake-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .intake-interactive-card:last-child {
+    grid-column: auto;
+    max-width: none;
+    margin: 0;
+  }
+
+  .intake-card-ui {
+    min-height: 260px;
+    padding: 2rem 1.4rem 1.8rem;
+  }
+
+  .intake-section-title {
+    font-size: clamp(2rem, 9vw, 2.8rem);
+  }
+
+  .intake-icon-frame {
+    width: 66px;
+    height: 66px;
+    font-size: 1.75rem;
+  }
+}

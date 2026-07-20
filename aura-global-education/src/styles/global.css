@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=DM+Sans:wght@400;500;600;700;800&display=swap');
+@import './Animation.css';
+
+:root {
+  --navy:        #1a2558;
+  --navy-dark:   #111a3e;
+  --navy-light:  rgba(26, 37, 88, 0.08);
+  --gold:        #c9a84c;
+  --gold-hover:  #e0bc5a;
+  --gold-light:  #f7f3e8;
+  --gold-faint:  rgba(201, 168, 76, 0.12);
+  --white:       #ffffff;
+  --off-white:   #f5f4ef;
+  --text-muted:  #666666;
+  --text-light:  rgba(255, 255, 255, 0.82);
+  --border-light:#e8e4d4;
+
+  /* Professional Fonts */
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;   
+
+  --transition:  0.22s ease;
+  --shadow-sm:   0 2px 12px rgba(26, 37, 88, 0.10);
+  --shadow-md:   0 8px 32px rgba(26, 37, 88, 0.13);
+  --shadow-lg:   0 16px 48px rgba(26, 37, 88, 0.18);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--off-white);
+  color: var(--navy);
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { cursor: pointer; font-family: var(--font-body); }
+img { max-width: 100%; display: block; }
+
+/* ══════════════════════════════════════════════════════════
+   GLOBAL TYPOGRAPHY SYSTEM
+   — Cormorant Garamond for ALL headings site-wide
+   — Standardised sizes for h1/h2/h3/h4
+   — Increased description, paragraph and feature text sizes
+   ══════════════════════════════════════════════════════════ */
+
+/* ── All headings use Cormorant Garamond ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display) !important;
+  line-height: 1.18;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 0.02em;
+}
+
+/* ── Standardised heading sizes ── */
+h1 { font-size: clamp(2.8rem, 5.5vw, 5rem); }
+h2 { font-size: clamp(2rem,   4vw,  3.2rem); }
+h3 { font-size: clamp(1.45rem,2.5vw, 1.85rem); }
+h4 { font-size: clamp(1.2rem, 2vw,  1.5rem); }
+
+/* ── Global paragraph / description ── */
+p {
+  font-family: var(--font-body);
+  font-size: 1.08rem;
+  line-height: 1.85;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* ── All spans, labels, links, buttons inherit strong weight ── */
+span, label, a, button, li {
+  font-weight: 600;
+}
+
+input, textarea, select {
+  font-family: var(--font-body);
+  font-weight: 600;
+}
+
+/* ══════════════════════════════════════════════════════════
+   PAGE-LEVEL HEADING OVERRIDES (all pages)
+   ══════════════════════════════════════════════════════════ */
+
+/* ── About page ── */
+.age-main-heading,
+.age-section-title,
+.age-cta-title          { font-family: var(--font-display) !important; }
+.age-section-title      { font-size: clamp(2rem, 4vw, 3.2rem) !important; }
+.age-main-heading       { font-size: clamp(2.8rem, 5.5vw, 5rem) !important; }
+.age-cta-title          { font-size: clamp(2.2rem, 4.5vw, 3.6rem) !important; }
+.age-paragraph-text     { font-size: 1.08rem !important; line-height: 1.85 !important; }
+.age-cta-subtitle       { font-size: 1.08rem !important; line-height: 1.85 !important; }
+
+/* About — card headings & descriptions */
+.age-ofcard-title,
+.age-bencard-heading,
+.age-modecard-heading,
+.age-whycard-title,
+.age-timeline-title     { font-family: var(--font-display) !important;
+                           font-size: 1.3rem !important; }
+.age-ofcard-description,
+.age-bencard-paragraph,
+.age-modecard-paragraph,
+.age-whycard-text,
+.age-timeline-desc,
+.age-about-description  { font-size: 1rem !important; line-height: 1.85 !important; }
+.age-tag-item           { font-size: 0.95rem !important; }
+
+/* ── Contact page ── */
+.con-main-heading,
+.con-section-title,
+.con-form-box-title     { font-family: var(--font-display) !important; }
+.con-main-heading       { font-size: clamp(2.8rem, 5.5vw, 5rem) !important; }
+.con-section-title      { font-size: clamp(2rem, 4vw, 3.2rem) !important; }
+.con-form-box-title     { font-size: 1.7rem !important; }
+.con-form-box-subtitle  { font-size: 1.05rem !important; line-height: 1.8 !important; }
+.con-infobox-label,
+.con-infobox-value      { font-size: 1rem !important; }
+
+/* ── Exam Prep page ── */
+.exm-main-heading,
+.exm-section-title      { font-family: var(--font-display) !important; }
+.exm-main-heading       { font-size: clamp(2.8rem, 5.5vw, 5rem) !important; }
+.exm-section-title      { font-size: clamp(2rem, 4vw, 3.2rem) !important; }
+.exm-exam-name,
+.exm-tab-name           { font-family: var(--font-display) !important;
+                           font-size: 1.4rem !important; }
+.exm-desc-text,
+.exm-tip-text,
+.exm-section-body p     { font-size: 1.05rem !important; line-height: 1.85 !important; }
+
+/* ── Services page ── */
+.srv-main-heading,
+.srv-section-title      { font-family: var(--font-display) !important; }
+.srv-main-heading       { font-size: clamp(2.8rem, 5.5vw, 5rem) !important; }
+.srv-section-title      { font-size: clamp(2rem, 4vw, 3.2rem) !important; }
+.srv-service-card__title{ font-family: var(--font-display) !important;
+                           font-size: 1.4rem !important; }
+.srv-service-card__desc { font-size: 1.05rem !important; line-height: 1.85 !important; }
+
+/* ── Service Detail page ── */
+.sd-main-heading,
+.sd-title,
+.sd-features-heading    { font-family: var(--font-display) !important; }
+.sd-main-heading        { font-size: clamp(2.8rem, 5.5vw, 5rem) !important; }
+.sd-title               { font-size: clamp(2rem, 4vw, 3.2rem) !important; }
+.sd-features-heading    { font-size: 1.7rem !important; }
+.sd-desc                { font-size: 1.08rem !important; line-height: 1.85 !important; }
+.sd-feature             { font-size: 1.05rem !important; }
+.sd-feature span        { font-size: 1.05rem !important; }
+
+/* ── Study Abroad page ── */
+.sa-main-heading,
+.sa-section-title,
+.study-title            { font-family: var(--font-display) !important; }
+.sa-main-heading        { font-size: clamp(2.8rem, 5.5vw, 5rem) !important; }
+.study-title            { font-size: clamp(2rem, 4vw, 3.2rem) !important; }
+.study-sub              { font-size: 1.08rem !important; line-height: 1.85 !important; }
+.front-name,
+.back-country-name      { font-family: var(--font-display) !important;
+                           font-size: 1.45rem !important; }
+.back-feature-item span,
+.other-feature-item span{ font-size: 1rem !important; }
+
+/* ── Hero section ── */
+.hero__title            { font-family: var(--font-display) !important;
+                           font-size: clamp(2.6rem, 5.5vw, 5rem) !important; }
+.hero__desc             { font-size: 1.1rem !important; line-height: 1.85 !important; }
+
+/* ── Home page ── */
+.ptb-section-heading,
+.ptb-title              { font-family: var(--font-display) !important; }
+
+/* ── OverseasServices component ── */
+.os-heading             { font-family: var(--font-display) !important;
+                           font-size: clamp(2rem, 4vw, 3.2rem) !important; }
+.os-desc                { font-size: 1.08rem !important; line-height: 1.85 !important; }
+.os-card__title         { font-family: var(--font-display) !important;
+                           font-size: 1.35rem !important; }
+.os-card__desc          { font-size: 1.05rem !important; line-height: 1.8 !important; }
+
+/* ── AboutSection component ── */
+.aura-about__heading    { font-family: var(--font-display) !important;
+                           font-size: clamp(2rem, 4vw, 3.2rem) !important; }
+.aura-about-description { font-size: 1.08rem !important; line-height: 1.85 !important; }
+
+/* ── Why students section ── */
+.wss-card-title         { font-family: var(--font-display) !important;
+                           font-size: 1.35rem !important; }
+.wss-card-desc          { font-size: 1.05rem !important; line-height: 1.8 !important; }
+
+/* ── Consultation form ── */
+.as-card-title          { font-family: var(--font-display) !important;
+                           font-size: 1.3rem !important; }
+.as-card-desc,
+.as-form-mini-desc      { font-size: 1rem !important; line-height: 1.8 !important; }
+
+/* ── Education Qualification component ── */
+.edu-card-title         { font-family: var(--font-display) !important;
+                           font-size: 1.3rem !important; }
+.edu-card-desc          { font-size: 1rem !important; line-height: 1.8 !important; }
+
+/* ── Scholarship Popup ── */
+.sp-title               { font-family: var(--font-display) !important;
+                           font-size: 1.5rem !important; }
+.sp-description         { font-size: 1.05rem !important; line-height: 1.8 !important; }
+
+/* ── Footer ── */
+.aura-footer-logo,
+.aura-col-heading       { font-family: var(--font-display) !important; }
+.aura-col-heading       { font-size: 1.25rem !important; }
+.aura-brand-desc        { font-size: 1rem !important; line-height: 1.8 !important; }
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE DOWNSCALES
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  body { font-size: 16px; }
+  p    { font-size: 1rem !important; }
+  h1   { font-size: clamp(2.2rem, 7vw, 3.2rem) !important; }
+  h2   { font-size: clamp(1.7rem, 5vw, 2.4rem) !important; }
+  h3   { font-size: clamp(1.3rem, 4vw, 1.6rem) !important; }
+}
+
+@media (max-width: 480px) {
+  body { font-size: 15px; }
+  p    { font-size: 0.97rem !important; }
+}

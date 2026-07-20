@@ -1,0 +1,381 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --navy:         #1a2558;
+  --navy-dark:    #111a3e;
+  --navy-light:   #e8ecf8;
+  --gold:         #c9a84c;
+  --gold-faint:   #f7f3ea;
+  --white:        #ffffff;
+  --off-white:    #f8f7f4;
+  --text-muted:   #888899;
+  --text-light:   rgba(255, 255, 255, 0.78);
+  --border-light: rgba(26, 37, 88, 0.09);
+
+  --shadow-sm: 0 4px 20px rgba(26, 37, 88, 0.05);
+  --shadow-md: 0 12px 35px rgba(26, 37, 88, 0.13), 0 4px 12px rgba(201, 168, 76, 0.08);
+  --shadow-lg: 0 20px 50px rgba(11, 17, 41, 0.2);
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+  --ease-out:     cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-spring:  cubic-bezier(0.34, 1.6, 0.64, 1);
+  --transition:   0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ── Full-page section ── */
+.edu-section {
+  min-height: calc(100vh - 80px - 60px);
+  background: var(--off-white);
+  background-image:
+    radial-gradient(ellipse 70% 50% at 95% 5%,  rgba(201,168,76,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 45% at 5% 95%,  rgba(26,37,88,0.05)  0%, transparent 55%);
+  padding: 5rem 2rem 6rem;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.edu-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ══ HEADER ══ */
+.edu-header-wrapper {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.edu-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 700;
+  /* FIX: removed "color: black !important" — it was overriding .is-gold */
+  color: var(--navy-dark);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0 0.28em;
+  line-height: 1.2;
+}
+
+.edu-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+/* ── FIX: words start hidden but have a CSS fallback animation ──
+   If JS observer fires correctly, the inline style overrides this.
+   If JS never fires (element already in viewport on mount, or refs
+   not ready), this fallback ensures words are still revealed. ── */
+.edu-word-inner {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  line-height: 1.3;
+  /* Fallback: animate automatically after a short delay */
+  animation: eduWordReveal 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.3s forwards;
+}
+
+/* JS overrides animation with per-word staggered delays via inline style */
+
+.edu-word-inner.is-gold {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.edu-divider {
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  border-radius: 4px;
+  margin: 1.2rem auto 0;
+  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.edu-divider.is-visible { width: 90px; }
+
+.edu-section-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin: 1.2rem 0 0;
+  line-height: 1.7;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.8s ease 0.6s, transform 0.8s ease 0.6s;
+}
+
+.edu-section-subtitle.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ══ 2-COLUMN GRID ══ */
+.edu-stack-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+}
+
+/* ══ ROW LABEL ══ */
+.edu-list-row {
+  position: relative;
+  cursor: pointer;
+  opacity: 0;
+  display: block;
+}
+
+.edu-list-row.from-left  { transform: translateY(36px) translateX(-14px) scale(0.98); }
+.edu-list-row.from-right { transform: translateY(36px) translateX(14px)  scale(0.98); }
+
+.edu-list-row.is-reveal-active {
+  animation: eduRowEntrance 0.85s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: var(--row-delay, 0s);
+}
+
+/* ══ CARD BOX ══ */
+.edu-row-ui-box {
+  background: var(--white);
+  border: 1.5px solid var(--border-light);
+  border-radius: 18px;
+  padding: 1.4rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform     var(--transition),
+    border-color  var(--transition),
+    box-shadow    var(--transition),
+    background    var(--transition);
+}
+
+/* Gold left-edge accent bar */
+.edu-row-ui-box::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--gold), #e2c37a);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  border-radius: 0 2px 2px 0;
+  transition: transform 0.35s var(--ease-out);
+}
+
+/* ── Hidden radio ── */
+.edu-hidden-radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* ── Custom radio dot ── */
+.edu-custom-radio-btn {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border: 2px solid rgba(26, 37, 88, 0.15);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--white);
+  flex-shrink: 0;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.edu-radio-core {
+  width: 10px;
+  height: 10px;
+  background: var(--gold);
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.3s var(--ease-spring);
+}
+
+/* ── Left meta row ── */
+.edu-left-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Icon ── */
+.edu-icon-wrapper {
+  font-size: 1.65rem;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: color var(--transition), transform 0.35s var(--ease-spring);
+}
+
+/* ── Text block ── */
+.edu-text-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 0.18rem;
+}
+
+.edu-card-title {
+  font-family: var(--font-body);
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0;
+  line-height: 1.3;
+  white-space: normal;
+  word-break: break-word;
+  transition: color var(--transition);
+}
+
+.edu-card-desc {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.4;
+  white-space: normal;
+  word-break: break-word;
+  transition: color var(--transition);
+}
+
+/* ── Arrow indicator ── */
+.edu-arrow-indicator {
+  font-size: 1.5rem;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transform: translateX(-10px);
+  opacity: 0;
+  transition: transform var(--transition), opacity var(--transition), color var(--transition);
+}
+
+/* ══ HOVER STATES ══ */
+.edu-list-row:hover .edu-row-ui-box {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+  box-shadow: var(--shadow-md);
+}
+
+.edu-list-row:hover .edu-row-ui-box::after { transform: scaleY(1); }
+
+.edu-list-row:hover .edu-custom-radio-btn {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.06);
+}
+
+.edu-list-row:hover .edu-icon-wrapper {
+  color: var(--gold);
+  transform: scale(1.12) rotate(-4deg);
+}
+
+.edu-list-row:hover .edu-arrow-indicator {
+  transform: translateX(0);
+  opacity: 1;
+  color: var(--gold);
+}
+
+.edu-list-row:hover .edu-card-title { color: var(--navy-dark); }
+
+/* ══ CHECKED / SELECTED ══ */
+.edu-hidden-radio:checked + .edu-row-ui-box {
+  background: var(--navy-dark);
+  border-color: var(--navy-dark);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.edu-hidden-radio:checked + .edu-row-ui-box::after { transform: scaleY(1); }
+
+.edu-hidden-radio:checked + .edu-row-ui-box .edu-custom-radio-btn {
+  border-color: var(--gold);
+  background: rgba(255,255,255,0.1);
+}
+
+.edu-hidden-radio:checked + .edu-row-ui-box .edu-radio-core  { transform: scale(1); }
+.edu-hidden-radio:checked + .edu-row-ui-box .edu-icon-wrapper { color: var(--gold); }
+.edu-hidden-radio:checked + .edu-row-ui-box .edu-card-title   { color: var(--white); }
+.edu-hidden-radio:checked + .edu-row-ui-box .edu-card-desc    { color: var(--text-light); }
+
+.edu-hidden-radio:checked + .edu-row-ui-box .edu-arrow-indicator {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--gold);
+}
+
+/* ══ LOADING / EMPTY ══ */
+.loading-spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  gap: 1rem;
+  font-family: var(--font-body);
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.loading-spinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid #e8eaf0;
+  border-top-color: var(--navy);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.no-data-message {
+  text-align: center;
+  padding: 4rem 2rem;
+  font-family: var(--font-body);
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+/* ══ KEYFRAMES ══ */
+@keyframes eduWordReveal {
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes eduRowEntrance {
+  to { opacity: 1; transform: translateY(0) translateX(0) scale(1); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width: 868px) {
+  .edu-stack-layout {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .edu-section { padding: 4rem 1.25rem 5rem; }
+}
+
+@media (max-width: 580px) {
+  .edu-icon-wrapper { display: none; }
+  .edu-row-ui-box   { padding: 1.2rem 1rem; }
+  .edu-card-title   { font-size: 0.93rem; }
+}

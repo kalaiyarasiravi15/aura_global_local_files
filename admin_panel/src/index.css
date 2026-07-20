@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --navy: #1a2558;
+  --navy-dark: #111a3e;
+  --navy-light: rgba(26, 37, 88, 0.08);
+  --gold: #c9a84c;
+  --gold-hover: #e0bc5a;
+  --gold-light: #f7f3e8;
+  --white: #ffffff;
+  --off-white: #f5f4ef;
+  --text-muted: #666666;
+  --border-light: #e8e4d4;
+  --font-display: 'times new roman', serif;
+  /* Use Poppins for the whole admin panel */
+  --font-body: 'times new roman', serif;
+  --shadow-md: 0 8px 32px rgba(26, 37, 88, 0.13);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--off-white);
+  color: var(--navy);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font: inherit;
+}

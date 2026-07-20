@@ -1,0 +1,257 @@
+/* src/pages/Services.css */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --navy:         #1a2558;
+  --navy-dark:    #121a3e;
+  --gold:         #c9a84c;
+  --gold-light:   #fbf8ef;
+  --gold-mid:     #f0e6c0;
+  --white:        #ffffff;
+  --text-body:    #374151;
+  --border-light: #eef0f6;
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body:    'Cormorant Garamond', Georgia, 'Times New Roman', serif;;
+  --transition:   0.25s ease-in-out;
+}
+
+.srv-services-page {
+  font-family: var(--font-body);
+  background: #f5f4ef;
+  min-height: 100vh;
+}
+
+/* ══════════════════════════════════
+   HERO BANNER
+   ══════════════════════════════════ */
+.srv-hero-section {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 120px 40px 70px;
+}
+
+.srv-hero-bg-image {
+  position: absolute;
+  inset: 0;
+  background: url('../assets/studying-abroad-1.jpg') center / cover no-repeat;
+  transform: scale(1.07);
+  transition: transform 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.srv-hero-bg-image.srv-bg-zoomed {
+  transform: scale(1);
+}
+
+.srv-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(18,26,62,0.58) 0%, rgba(18,26,62,0.74) 100%);
+}
+
+.srv-hero-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  animation: srv-fadeUp 0.9s ease both;
+}
+
+.srv-main-heading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 700;
+  line-height: 1.06;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 2px 28px rgba(0,0,0,0.25);
+}
+
+@keyframes srv-fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════
+   GRID SECTION
+   ══════════════════════════════════ */
+.srv-grid-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px 24px 90px;
+}
+
+.srv-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px 30px;
+}
+
+/* Loading state */
+.srv-loading {
+  text-align: center;
+  padding: 80px 0;
+  font-size: 16px;
+  color: var(--navy);
+  font-family: var(--font-body);
+  opacity: 0.6;
+}
+
+/* ══════════════════════════════════
+   SERVICE CARD
+   ══════════════════════════════════ */
+.srv-service-card {
+  background: var(--white);
+  border: 1.5px solid var(--border-light);
+  border-radius: 24px;
+  padding: 56px 32px 36px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+  box-shadow: 0 10px 35px rgba(26, 37, 88, 0.02);
+}
+
+.srv-service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgba(26, 37, 88, 0.1);
+  border-color: rgba(201, 168, 76, 0.25);
+}
+
+/* Floating top icon badge */
+.srv-service-card__icon-badge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 68px;
+  height: 68px;
+  background: var(--gold-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  z-index: 5;
+  animation: srvCardFloat 3.8s ease-in-out infinite;
+  animation-delay: calc(var(--card-idx) * 0.2s);
+}
+
+.srv-service-card__icon-glow {
+  position: absolute;
+  inset: -1px;
+  background: rgba(201, 168, 76, 0.08);
+  border-radius: 50%;
+  filter: blur(3px);
+  z-index: 1;
+}
+
+.srv-service-card__icon {
+  font-size: 22px;
+  color: var(--gold);
+  position: relative;
+  z-index: 2;
+  transition: transform 0.4s ease;
+}
+
+.srv-service-card:hover .srv-service-card__icon {
+  transform: rotate(15deg) scale(1.05);
+}
+
+/* Card content */
+.srv-service-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.srv-service-card__title {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.srv-service-card__desc {
+  font-size: 1.05rem;
+  color: var(--text-body);
+  line-height: 1.8;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* Button */
+.srv-service-card__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 24px;
+  background: var(--navy);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 10px;
+  letter-spacing: 0.3px;
+  transition: background var(--transition), transform 0.15s ease, box-shadow 0.3s ease;
+  margin-top: auto;
+}
+
+.srv-service-card__btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.srv-service-card__btn:hover {
+  background: var(--gold);
+  color: var(--navy-dark);
+  box-shadow: 0 8px 20px rgba(201, 168, 76, 0.25);
+}
+
+.srv-service-card__btn:hover svg {
+  transform: translateX(4px);
+}
+
+/* Floating badge animation */
+@keyframes srvCardFloat {
+  0%   { transform: translate(-50%, -50%) translateY(0px);   box-shadow: 0 3px 10px rgba(201, 168, 76, 0.05); }
+  50%  { transform: translate(-50%, -50%) translateY(-5px);  box-shadow: 0 10px 20px rgba(201, 168, 76, 0.14); }
+  100% { transform: translate(-50%, -50%) translateY(0px);   box-shadow: 0 3px 10px rgba(201, 168, 76, 0.05); }
+}
+
+/* ══════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════ */
+@media (max-width: 1024px) {
+  .srv-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px 24px;
+  }
+  .srv-grid-section {
+    padding: 100px 24px 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .srv-main-heading { font-size: 40px; }
+  .srv-grid {
+    grid-template-columns: 1fr;
+    gap: 55px 0;
+  }
+  .srv-grid-section {
+    padding: 90px 16px 50px;
+  }
+  .srv-service-card {
+    padding: 52px 24px 32px;
+  }
+}

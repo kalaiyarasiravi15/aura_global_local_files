@@ -1,0 +1,492 @@
+/* ==========================================================================
+   DESIGN ENGINE SYSTEM & RESET
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --navy:         #1a2558;
+  --navy-dark:    #111a3e;
+  --navy-light:   rgba(26, 37, 88, 0.08);
+  --gold:         #c9a84c;
+  --gold-hover:   #e0bc5a;
+  --gold-light:   #f7f3e8;
+  --gold-faint:   rgba(201, 168, 76, 0.12);
+  --white:        #ffffff;
+  --bg-navy-light-blue: #eef2f7;
+  --text-muted:   #666666;
+  --text-light:   rgba(255, 255, 255, 0.82);
+  --border-light: #dbe2ec;
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body:    'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  --transition:   0.22s ease;
+  --shadow-sm:    0 2px 12px rgba(26, 37, 88, 0.08);
+  --shadow-md:    0 8px 32px rgba(26, 37, 88, 0.11);
+  --shadow-lg:    0 16px 48px rgba(26, 37, 88, 0.15);
+}
+
+*, *::before, *::after { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+/* ==========================================================================
+   EXISTING SCROLL REVEAL ENGINE
+   ========================================================================== */
+.aura-scroll-reveal {
+  opacity: 0;
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--delay, 0s);
+}
+.aura-reveal-left { transform: translateX(-60px); }
+.aura-reveal-up   { transform: translateY(38px); }
+
+.aura-in-view.aura-scroll-reveal,
+.aura-in-view .aura-scroll-reveal {
+  opacity: 1;
+  transform: translateX(0) translateY(0) !important;
+}
+
+/* ==========================================================================
+   NEW — WORD-BY-WORD HEADING ANIMATION WITH FIXED SPACING
+   ========================================================================== */
+
+.aura-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.52s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--word-delay, 0s);
+  will-change: opacity, transform;
+
+  /* Strict word spacing setup */
+  margin-right: 0.25em;
+}
+
+/* Last word spaces control */
+.aura-word:last-child {
+  margin-right: 0;
+}
+
+.aura-word--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.aura-word--highlight {
+  color: var(--navy);
+  font-style: italic;
+  font-weight: 600;
+  position: relative;
+}
+
+/* Underline sweep on highlight words */
+.aura-word--highlight::after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  bottom: 6px;
+  height: 10px;
+  background: var(--gold-faint);
+  border-radius: 2px;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
+}
+
+.aura-word--visible.aura-word--highlight::after {
+  transform: scaleX(1);
+}
+
+/* ==========================================================================
+   NEW — TAG / DESC / ACTION BAR FADE-UP ANIMATION
+   ========================================================================== */
+.aura-fade {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--fade-delay, 0s);
+  will-change: opacity, transform;
+}
+
+.aura-fade--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   SECTION CONTAINER
+   ========================================================================== */
+.aura-about-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 120px 8%;
+  background: var(--bg-navy-light-blue);
+  min-height: 680px;
+  gap: 80px;
+  overflow: hidden;
+  position: relative;
+  font-family: var(--font-body);
+}
+
+.aura-about-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.25;
+}
+
+/* ==========================================================================
+   LEFT VISUAL BLOCK
+   ========================================================================== */
+.aura-about-left {
+  position: relative;
+  flex: 0 0 520px;
+  height: 620px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.aura-bg-dashed-ring {
+  position: absolute;
+  width: 490px;
+  height: 490px;
+  border: 1.5px dashed rgba(26, 37, 88, 0.15);
+  border-radius: 50%;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: aura-spin-ring 48s linear infinite;
+}
+
+.aura-flight-orbit-track {
+  position: absolute;
+  width: 490px;
+  height: 490px;
+  border-radius: 50%;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: aura-spin-orbit 28s linear infinite;
+  pointer-events: none;
+}
+
+.flight-node {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  color: var(--gold);
+  filter: drop-shadow(0 2px 5px rgba(201, 168, 76, 0.45));
+}
+
+.fn-1 { top: -11px;    left: 50%;  transform: translateX(-50%) rotate(90deg); }
+.fn-2 { right: -11px;  top: 50%;   transform: translateY(-50%) rotate(180deg); }
+.fn-3 { bottom: -11px; left: 50%;  transform: translateX(-50%) rotate(270deg); }
+.fn-4 { left: -11px;   top: 50%;   transform: translateY(-50%) rotate(0deg); }
+
+.aura-main-circle-card {
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: box-shadow var(--transition);
+  animation: aura-float-main 7s ease-in-out infinite alternate;
+}
+
+.aura-main-circle-card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.aura-circle-color-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--white);
+  z-index: 0;
+}
+
+.aura-inner-decor-circle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.decor-c1 { width: 14px; height: 14px; background: var(--navy);      top: 65px;    left: 145px; z-index: 1; }
+.decor-c2 { width: 12px; height: 12px; background: var(--gold);      right: 50px;  top: 240px;  z-index: 1; }
+.decor-c3 { width: 14px; height: 14px; background: var(--navy-dark); bottom: 45px; left: 165px; z-index: 1; }
+
+.aura-main-inside-img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  z-index: 2;
+}
+
+.aura-overlay-bubble {
+  position: absolute;
+  border-radius: 50%;
+  box-shadow: var(--shadow-md);
+  border: 4px solid var(--white);
+  z-index: 5;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aura-overlay-bubble img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.bubble-bg-color { position: absolute; inset: 0; border-radius: 50%; z-index: 0; }
+.pink-layer      { background: var(--gold-light); }
+.purple-layer    { background: var(--navy-light); }
+
+.bubble-pos-left {
+  width: 155px; height: 155px;
+  top: 45%; left: 15px;
+  transform: translateY(-25%);
+  animation: aura-float-bubble-left 5s ease-in-out infinite alternate;
+  animation-delay: 0.4s;
+}
+
+.bubble-pos-right {
+  width: 140px; height: 140px;
+  bottom: 12%; right: 25px;
+  animation: aura-float-bubble-right 6.2s ease-in-out infinite alternate;
+  animation-delay: 1s;
+}
+
+.aura-overlay-bubble:hover {
+  box-shadow: var(--shadow-lg);
+  transform: scale(1.05) !important;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+/* ==========================================================================
+   KEYFRAMES
+   ========================================================================== */
+@keyframes aura-spin-ring {
+  0%   { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes aura-spin-orbit {
+  0%   { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes aura-float-main {
+  0%   { transform: translate(-50%, -50%) translateY(0px); }
+  50%  { transform: translate(-50%, -50%) translateY(-10px); }
+  100% { transform: translate(-50%, -50%) translateY(4px); }
+}
+
+@keyframes aura-float-bubble-left {
+  0%   { transform: translateY(calc(-25% + 0px)); }
+  50%  { transform: translateY(calc(-25% - 8px)); }
+  100% { transform: translateY(calc(-25% + 4px)); }
+}
+
+@keyframes aura-float-bubble-right {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-10px); }
+  100% { transform: translateY(3px); }
+}
+
+/* ==========================================================================
+   RIGHT CONTENT BLOCK
+   ========================================================================== */
+.aura-about-right {
+  flex: 1;
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.aura-about-tag {
+  color: var(--gold);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.aura-about-tag::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+.aura-about-heading {
+  font-family: var(--font-display);
+  color: var(--navy-dark);
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1.35; /* Adjusted padding flow */
+  margin: 0 0 22px 0;
+}
+
+.aura-about-description {
+  font-family: var(--font-body);
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+/* ==========================================================================
+   ACTION BAR & BUTTON
+   ========================================================================== */
+.aura-about-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: var(--white);
+  padding: 8px 10px 8px 24px;
+  border-radius: 50px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+}
+
+.aura-about-info-text {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 12px;
+  color: var(--text-muted);
+}
+
+.aura-about-info-icon {
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+}
+
+.aura-about-placeholder {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 260px;
+}
+
+.aura-about-btn {
+  background: var(--navy);
+  color: var(--white);
+  border: none;
+  border-radius: 40px;
+  padding: 14px 32px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  transition: background var(--transition), transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow var(--transition);
+}
+
+.aura-about-btn:hover {
+  background: var(--gold-hover);
+  color: var(--navy-dark);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(201, 168, 76, 0.35);
+}
+
+.aura-about-btn:active { transform: translateY(-1px) scale(0.98); }
+
+.btn-arrow { transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.aura-about-btn:hover .btn-arrow { transform: translateX(5px); }
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .aura-about-container {
+    flex-direction: column;
+    text-align: center;
+    padding: 80px 6%;
+    gap: 70px;
+  }
+  .aura-about-right {
+    align-items: center;
+    max-width: 100%;
+  }
+  .aura-about-action-bar {
+    width: 100%;
+    max-width: 520px;
+  }
+  .aura-about-tag::before { display: none; }
+}
+
+@media (max-width: 600px) {
+  .aura-about-left { width: 100%; height: 440px; flex: none; }
+  .aura-main-circle-card { width: 280px; height: 280px; }
+  .decor-c1 { top: 40px;    left: 110px; }
+  .decor-c2 { right: 35px;  top: 170px; }
+  .decor-c3 { bottom: 30px; left: 120px; }
+  .aura-bg-dashed-ring,
+  .aura-flight-orbit-track { width: 360px; height: 360px; }
+  .bubble-pos-left  { width: 110px; height: 110px; left: 5px; }
+  .bubble-pos-right { width: 100px; height: 100px; right: 5px; bottom: 5%; }
+  
+  .aura-about-heading { font-size: 2.1rem; }
+  .aura-word { margin-right: 0.22em; } /* Compact display space adjustments */
+  
+  .aura-about-action-bar {
+    flex-direction: column;
+    border-radius: 24px;
+    padding: 18px;
+    gap: 15px;
+  }
+  .aura-about-info-text { width: 100%; justify-content: center; }
+  .aura-about-placeholder { max-width: 100%; white-space: normal; }
+  .aura-about-btn { width: 100%; justify-content: center; }
+}

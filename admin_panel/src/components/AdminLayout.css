@@ -1,0 +1,19 @@
+/* AdminLayout wrapper */
+.aura-admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f5f7;
+}
+
+.aura-admin-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.aura-admin-content {
+  flex: 1;
+  overflow-y: auto;
+}

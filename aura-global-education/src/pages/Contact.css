@@ -1,0 +1,338 @@
+/* src/pages/Contact.css */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --navy:         #1a2558;
+  --gold:         #c9a84c;
+  --gold-light:  #fbf8ef;
+  --gold-hover:  #b8963e;
+  --white:       #ffffff;
+  --text-muted:  #666666;
+  --border-light:#eef0f6;
+  --bg-page:     #f5f4ef;
+  
+  /* Form Field Status Color Configurations */
+  --err-red-tone: #e04f4f;
+  --err-bg-shade: #fff6f6;
+  --grn-ok-tone:  #2fa872;
+  --grn-bg-shade: #f4fbf7;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'DM Sans',sans-serif; }
+.con-contact-wrapper { background:var(--bg-page); overflow-x:hidden; color:var(--navy); }
+
+/* ── SCROLL REVEAL ── */
+.con-reveal-block { opacity:0; transform:translateY(28px); transition:opacity 0.7s ease,transform 0.7s ease; }
+.con-reveal-block.con-reveal-visible { opacity:1; transform:translateY(0); }
+/* form column: stretch to fill, start from top */
+.con-form-column-stretch { display:flex; flex-direction:column; align-items:stretch; align-self:flex-start; }
+.con-grid-cell-stretch { width:100%; height:100%; }
+
+.con-layout-container { max-width:1180px; margin:auto; padding:0 32px; }
+.con-content-section { padding:90px 0; }
+
+.con-section-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:46px; line-height:1.2;
+  margin-bottom:20px; color:var(--navy);
+}
+.con-section-title em { color:var(--gold); font-style:normal; }
+.con-section-eyebrow {
+  display:block; color:var(--gold); letter-spacing:3px;
+  font-size:11px; margin-bottom:12px;
+  text-transform:uppercase; font-weight:700;
+}
+.con-divider-gold {
+  width:60px; height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-hover));
+  border-radius:2px; margin-bottom:25px;
+}
+.con-paragraph-text { color:var(--text-muted); font-size:1.08rem; line-height:1.85; margin-bottom:36px; }
+
+/* ══════════════════════════════════
+   HERO BANNER
+   ══════════════════════════════════ */
+.con-hero-section {
+  position:relative; min-height:420px;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden; padding:120px 40px 70px;
+}
+.con-hero-bg-image {
+  position: absolute;
+  inset: 0;
+  background: url('../assets/contact.jpg') center / cover no-repeat;
+  transform: scale(1.07);
+  transition: transform 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.con-hero-bg-image.con-bg-zoomed { transform:scale(1); }
+.con-hero-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to bottom,rgba(18,26,62,0.58) 0%,rgba(18,26,62,0.74) 100%);
+}
+.con-hero-inner { position:relative; z-index:2; text-align:center; animation:con-fadeUp 0.9s ease both; }
+.con-main-heading {
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:clamp(2.8rem,6vw,5rem); font-weight:700;
+  line-height:1.06; color:#fff; margin:0;
+  text-shadow:0 2px 28px rgba(0,0,0,0.25);
+}
+@keyframes con-fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ══════════════════════════════════
+   MAIN OUTER SPLIT: LEFT | RIGHT
+   ══════════════════════════════════ */
+.con-split-grid {
+  display:grid;
+  grid-template-columns:1.05fr 0.95fr;
+  gap:60px;
+  align-items:start;
+}
+
+/* LEFT COLUMN */
+.con-details-column {
+  display:flex;
+  flex-direction:column;
+}
+
+/* ══════════════════════════════════
+   2-COLUMN CARD GRID
+   ══════════════════════════════════ */
+.con-infobox-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:52px 24px;
+  margin-top:10px;
+}
+
+/* ══════════════════════════════════
+   CARD STYLES
+   ══════════════════════════════════ */
+.con-card {
+  position:relative;
+  display:flex;
+  width:100%;
+  padding:44px 20px 36px 20px;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  border-radius:20px;
+  border:2px solid var(--border-light);
+  background:var(--white);
+  transition:0.5s cubic-bezier(0.25,1,0.5,1);
+  text-decoration:none;
+  box-shadow:0 8px 24px rgba(26,37,88,0.04);
+  min-height:180px;
+}
+
+.con-title {
+  color:var(--navy); font-size:1.2rem; font-weight:700;
+  font-family:'Cormorant Garamond',serif;
+  line-height:1.4; margin-bottom:6px; transition:0.4s ease;
+}
+.con-subtitle {
+  color:var(--text-muted); font-size:1rem; font-weight:400;
+  line-height:1.7; transition:0.4s ease;
+  max-width:90%; margin-bottom:10px;
+}
+
+.con-icon-circle {
+  position:absolute; top:0; left:50%;
+  transform:translate(-50%,-50%);
+  display:flex; justify-content:center; align-items:center;
+  width:52px; height:52px; border-radius:50%;
+  background:var(--gold-light);
+  border:1px solid rgba(201,168,76,0.2);
+  box-shadow:0 4px 14px rgba(26,37,88,0.07);
+  transition:0.4s ease;
+}
+.con-infobox-icon { font-size:17px; color:var(--gold); transition:0.4s ease; }
+
+/* Round badge button */
+.con-btnRound {
+  display:inline-flex; justify-content:center; align-items:center; gap:7px;
+  height:32px; padding:5px 20px; border-radius:100px;
+  border:1px solid var(--gold); background:var(--white);
+  color:var(--navy); font-size:11px; font-weight:600;
+  letter-spacing:0.5px; transition:all 0.3s ease;
+}
+.con-btn-arrow { font-size:10px; color:var(--gold); transition:transform 0.3s ease; }
+.con-btnService {
+  position:absolute; bottom:-16px; left:50%;
+  transform:translate(-50%,0);
+  box-shadow:0 4px 14px rgba(26,37,88,0.08);
+  white-space:nowrap;
+}
+
+/* Hover state */
+.con-card:hover {
+  background:var(--gold); border-color:var(--gold);
+  transform:translateY(-4px);
+  box-shadow:0 18px 38px rgba(201,168,76,0.28);
+}
+.con-card:hover .con-title,
+.con-card:hover .con-subtitle { color:var(--white); }
+.con-card:hover .con-icon-circle {
+  background:var(--navy); border-color:var(--navy);
+  transform:translate(-50%,-50%) scale(1.08) rotate(-8deg);
+}
+.con-card:hover .con-infobox-icon { color:var(--white); }
+.con-card:hover .con-btnRound {
+  background:var(--navy); border-color:var(--navy); color:var(--white);
+  box-shadow:0 6px 14px rgba(26,37,88,0.2);
+}
+.con-card:hover .con-btn-arrow { color:var(--gold); transform:translateX(3px); }
+
+/* ══════════════════════════════════
+   RIGHT SIDE — CONTACT FORM
+   ══════════════════════════════════ */
+.con-form-box {
+  background:var(--white); border:1px solid var(--border-light);
+  border-radius:24px; padding:44px 36px;
+  box-shadow:0 20px 50px rgba(26,37,88,0.06);
+  display:flex; flex-direction:column;
+  position:sticky;
+  top:100px; 
+}
+.con-form-header { margin-bottom:30px; }
+.con-form-box-title { font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:700; color:var(--navy); margin-bottom:8px; }
+.con-form-box-subtitle { font-size:1.05rem; line-height:1.75; color:var(--text-muted); }
+
+.con-actual-form { display:flex; flex-direction:column; gap:18px; }
+
+.con-input-container { display:flex; flex-direction:column; width:100%; align-items:stretch; }
+.con-input-group { position:relative; display:flex; align-items:center; width:100%; }
+.con-field-icon {
+  position:absolute; left:18px; color:var(--gold); font-size:15px;
+  pointer-events:none; transition:transform 0.3s ease, color 0.3s ease;
+}
+.con-textarea-icon { top:20px; }
+
+.con-form-input {
+  width:100%; padding:15px 16px 15px 48px;
+  border-radius:12px; border:1px solid var(--border-light);
+  background:var(--gold-light); font-family:inherit; font-size:1rem;
+  color:var(--navy); transition:border-color 0.3s,background 0.3s,box-shadow 0.3s;
+}
+.con-form-textarea {
+  width:100%; padding:16px 16px 16px 48px;
+  border-radius:12px; border:1px solid var(--border-light);
+  background:var(--gold-light); font-family:inherit; font-size:1rem;
+  color:var(--navy); resize:none; transition:border-color 0.3s,background 0.3s,box-shadow 0.3s;
+}
+.con-form-input:focus,.con-form-textarea:focus {
+  outline:none; border-color:var(--gold); background:var(--white);
+  box-shadow:0 0 0 4px rgba(201,168,76,0.12);
+}
+.con-input-group:focus-within .con-field-icon { transform:scale(1.15); color:var(--navy); }
+
+/* ── CONDITIONAL VALIDATION STATE MANIPULATIONS ── */
+.con-input-group.con-valid .con-form-input,
+.con-input-group.con-valid .con-form-textarea {
+  border-color: var(--grn-ok-tone);
+  background: var(--grn-bg-shade);
+}
+.con-input-group.con-valid .con-field-icon { color: var(--grn-ok-tone); }
+
+.con-input-group.con-invalid .con-form-input,
+.con-input-group.con-invalid .con-form-textarea {
+  border-color: var(--err-red-tone);
+  background: var(--err-bg-shade);
+}
+.con-input-group.con-invalid .con-field-icon { color: var(--err-red-tone); }
+.con-input-group.con-invalid .con-form-input:focus,
+.con-input-group.con-invalid .con-form-textarea:focus { box-shadow: 0 0 0 4px rgba(224, 79, 79, 0.14); }
+
+/* ── TARGETED ERROR NOTIFICATIONS ── */
+.con-input-alert {
+  color: var(--err-red-tone);
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 6px;
+  margin-left: 4px;
+  display: block;
+  text-align: left;
+  animation: conAlertFieldIn 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes conAlertFieldIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.con-submit-btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:12px;
+  background:var(--navy); color:var(--white); border:none;
+  padding:16px; border-radius:12px; font-weight:600; font-size:15px;
+  cursor:pointer; transition:background 0.3s,transform 0.3s,box-shadow 0.3s;
+  margin-top:10px;
+}
+.con-submit-btn:hover {
+  background:var(--gold); color:var(--navy);
+  transform:translateY(-2px); box-shadow:0 12px 30px rgba(201,168,76,0.25);
+}
+.con-submit-icon { font-size:14px; transition:transform 0.3s ease; }
+.con-submit-btn:hover .con-submit-icon { transform:translate(4px,-4px) scale(1.12); }
+
+/* ══════════════════════════════════
+   MAP SECTION
+   ══════════════════════════════════ */
+.con-map-section {
+  line-height:0; display:block; width:100%;
+  background:var(--white); border-top:1px solid var(--border-light); margin-top:30px;
+}
+.con-map-frame-wrapper iframe { vertical-align:middle; filter:grayscale(0.1) contrast(1.02); }
+
+/* ══════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════ */
+@media (max-width:1024px) {
+  .con-split-grid { grid-template-columns:1fr; gap:70px; }
+  .con-infobox-grid { grid-template-columns:1fr 1fr; gap:52px 20px; }
+  .con-form-box { position:static; }
+}
+
+@media (max-width:600px) {
+  .con-infobox-grid { grid-template-columns:1fr; gap:52px 0; }
+  .con-main-heading { font-size:40px; }
+  .con-section-title { font-size:32px; }
+  .con-layout-container { padding:0 20px; }
+  .con-content-section { padding:60px 0; }
+  .con-form-box { padding:36px 20px; }
+  .con-card { padding:42px 16px 34px 16px; }
+}
+
+/* ── Country Select Custom Global Fixes ── */
+.con-form-select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23c9a84c' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat !important;
+  background-position: right 18px center !important;
+  background-size: 12px 12px !important;
+  padding-right: 44px !important;
+}
+
+/* Added explicit background-repeat/position/size restrictions to block state overrides */
+.con-input-group.con-invalid .con-form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23e04f4f' d='M6 8L1 3h10z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 18px center !important;
+  background-size: 12px 12px !important;
+}
+
+.con-input-group.con-valid .con-form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232fa872' d='M6 8L1 3h10z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 18px center !important;
+  background-size: 12px 12px !important;
+}
+
+.con-form-select option {
+  background: #1a2558;
+  color: #fff;
+}

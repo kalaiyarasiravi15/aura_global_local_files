@@ -1,0 +1,410 @@
+/* About.css */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght=600;700&family=DM+Sans:wght=400;500;600&display=swap');
+
+:root {
+  --navy:         #1a2558;
+  --gold:         #c9a84c;
+  --gold-light:  #fbf8ef;
+  --gold-hover:  #b8963e;
+  --white:       #ffffff;
+  --text-muted:  #666666;
+  --border-light:#eef0f6;
+  --bg-page:     #f5f4ef;
+  --navy-light:  #243070;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'DM Sans',sans-serif; }
+.age-about-wrapper { background:var(--bg-page); overflow-x:hidden; color:var(--navy); }
+
+/* ── LAYOUT ALIGNMENT MOTOR ── */
+.age-reveal-block { opacity:0; transform:translateY(28px); transition:opacity 0.7s ease,transform 0.7s ease; }
+.age-reveal-block.age-reveal-visible { opacity:1; transform:translateY(0); }
+
+.age-grid-cell-stretch { display: flex; flex-direction: column; height: 100%; width: 100%; }
+.age-flex-column-stretch { display: flex; flex-direction: column; align-items: stretch; height: 100%; }
+
+/* ── COMMON STRUCTURAL COMPONENTS ── */
+.age-layout-container { max-width:1180px; margin:auto; padding:0 32px; }
+.age-content-section { padding:90px 0; }
+
+.age-section-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:46px; line-height:1.2;
+  margin-bottom:20px; color:var(--navy);
+}
+.age-section-title em { color:var(--gold); font-style:normal; }
+.age-section-title.age-text-center { text-align:center; }
+
+.age-section-eyebrow {
+  display:block; color:var(--gold); letter-spacing:3px;
+  font-size:11px; margin-bottom:12px;
+  text-transform:uppercase; font-weight:700;
+}
+.age-section-eyebrow.age-text-center { text-align:center; }
+
+.age-divider-gold {
+  width:60px; height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-hover));
+  border-radius:2px; margin-bottom:25px;
+}
+.age-divider-center { margin:0 auto 35px; }
+.age-paragraph-text { color:var(--text-muted); font-size:1.08rem; line-height:1.85; margin-bottom:18px; }
+
+/* ══════════════════════════════════
+   HERO BANNER
+   ══════════════════════════════════ */
+.age-hero-section {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 120px 40px 70px;
+}
+.age-hero-bg-image {
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/about2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.07);
+  transition: transform 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.age-hero-bg-image.age-bg-zoomed { transform: scale(1); }
+.age-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(18,26,62,0.58) 0%, rgba(18,26,62,0.74) 100%);
+}
+.age-hero-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  animation: age-fadeUp 0.9s ease both;
+}
+.age-main-heading {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 700;
+  line-height: 1.06;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 2px 28px rgba(0,0,0,0.25);
+}
+@keyframes age-fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════
+   INTRO SECTION
+   ══════════════════════════════════ */
+.age-intro-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+.age-image-stack-wrapper { position:relative; height:480px; }
+.age-image-main {
+  position:absolute; width:75%; height:340px;
+  overflow:hidden; border-radius:20px;
+  box-shadow:0 20px 60px rgba(26,37,88,0.15);
+}
+.age-image-secondary {
+  position:absolute; right:0; bottom:0; width:55%; height:240px;
+  overflow:hidden; border-radius:20px;
+  border:5px solid var(--white);
+  box-shadow:0 12px 40px rgba(26,37,88,0.12);
+}
+.age-image-main img,.age-image-secondary img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s ease; }
+.age-image-main:hover img,.age-image-secondary:hover img { transform:scale(1.05); }
+
+.age-floating-badge {
+  position:absolute; top:50%; right:-20px; transform:translateY(-50%);
+  background:var(--navy); color:var(--white);
+  padding:20px 22px; border-radius:16px;
+  box-shadow:0 8px 30px rgba(26,37,88,0.25);
+  text-align:center; border:2px solid var(--gold);
+}
+.age-badge-number { display:block; font-size:40px; color:var(--gold); font-family:'Cormorant Garamond',serif; font-weight:700; line-height:1; }
+.age-badge-text { font-size:11px; line-height:1.6; opacity:0.85; margin-top:4px; display:block; }
+
+.age-tags-wrapper { display:flex; flex-wrap:wrap; gap:10px; margin-top:25px; }
+.age-tag-item {
+  padding:7px 16px; border-radius:20px;
+  background:var(--gold-light); color:var(--navy);
+  font-size:13px; font-weight:600;
+  border:1px solid rgba(201,168,76,0.3);
+  transition:background 0.3s,color 0.3s,transform 0.3s; cursor:default;
+}
+.age-tag-item:hover { background:var(--gold); color:var(--white); transform:translateY(-2px); }
+
+/* ══════════════════════════════════
+   WHAT WE OFFER (OFFER CARDS)
+   ══════════════════════════════════ */
+.age-offers-block { background:var(--white); }
+.age-offers-grid { 
+  display:grid; 
+  grid-template-columns:repeat(3, 1fr); 
+  gap:24px; 
+  margin-top:10px;
+  align-items: stretch;
+}
+
+.age-ofcard {
+  position:relative; overflow:hidden;
+  border:1px solid var(--border-light); border-radius:16px;
+  background:var(--white); padding:32px 24px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  cursor:default;
+  transition:box-shadow 0.3s ease;
+}
+.age-ofcard-hover-bg {
+  position:absolute; inset:0;
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 55%,var(--gold-hover) 100%);
+  transform:translateY(100%);
+  transition:transform 0.32s cubic-bezier(0.4,0,0.2,1); z-index:0;
+}
+.age-ofcard:hover { box-shadow:0 16px 48px rgba(26,37,88,0.13); }
+.age-ofcard:hover .age-ofcard-hover-bg { transform:translateY(0); }
+
+.age-ofcard-ghost-icon {
+  position:absolute; top:-30px; right:-30px;
+  font-size:100px; color:rgba(26,37,88,0.05);
+  transition:color 0.3s,transform 0.35s; z-index:1; pointer-events:none;
+}
+.age-ofcard:hover .age-ofcard-ghost-icon { color:rgba(255,255,255,0.07); transform:rotate(12deg) scale(1.08); }
+
+.age-ofcard-primary-icon {
+  position:relative; z-index:2; display:block;
+  font-size:28px; color:var(--gold); margin-bottom:16px;
+  transition:color 0.3s,transform 0.35s;
+}
+.age-ofcard:hover .age-ofcard-primary-icon { color:var(--white); transform:rotate(-8deg) scale(1.15); }
+
+.age-ofcard-title { position:relative; z-index:2; font-family:'Cormorant Garamond',serif; font-size:1.35rem; font-weight:700; color:var(--navy); margin-bottom:10px; transition:color 0.3s; }
+.age-ofcard:hover .age-ofcard-title { color:var(--white); }
+.age-ofcard-description { position:relative; z-index:2; font-size:1.05rem; line-height:1.85; color:var(--text-muted); transition:color 0.3s; }
+.age-ofcard:hover .age-ofcard-description { color:rgba(255,255,255,0.82); }
+
+/* ══════════════════════════════════
+   BENEFITS & MODES SIDE-BY-SIDE
+   ══════════════════════════════════ */
+.age-split-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items: stretch; }
+.age-bencard-stack, .age-modecard-stack { 
+  display:flex; 
+  flex-direction:column; 
+  gap:18px; 
+  margin-top:auto; 
+  height: 100%; 
+  justify-content: space-between; 
+}
+
+/* Benefit Cards Structuring */
+.age-bencard {
+  position:relative; border-radius:16px;
+  background:var(--white); border:1px solid var(--border-light);
+  transition:transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  overflow:hidden; flex: 1; display: flex;
+}
+.age-bencard::before {
+  content:""; position:absolute; left:0; top:0; width:4px; height:100%;
+  background:linear-gradient(180deg, var(--gold), var(--navy));
+}
+.age-bencard:hover { transform:translateX(5px); box-shadow:0 10px 36px rgba(26,37,88,0.10); border-color:rgba(201,168,76,0.3); }
+
+.age-bencard-content { display:flex; align-items:center; gap:18px; padding:24px; width: 100%; }
+.age-bencard-icon-holder {
+  width:50px; height:50px; min-width:50px; border-radius:12px;
+  background:var(--gold-light); display:flex; align-items:center; justify-content:center;
+  transition:background 0.3s, transform 0.3s;
+}
+.age-bencard:hover .age-bencard-icon-holder { background:var(--gold); transform:rotate(-6deg) scale(1.1); }
+.age-bencard-icon { font-size:20px; color:var(--gold); transition:color 0.3s; }
+.age-bencard:hover .age-bencard-icon { color:var(--white); }
+.age-bencard-text-holder { flex: 1; }
+.age-bencard-heading { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:700; color:var(--navy); margin-bottom:4px; }
+.age-bencard-paragraph { line-height:1.85; color:var(--text-muted); font-size:1.05rem; }
+
+/* Mode Cards Structuring */
+.age-modecard {
+  position:relative; border-radius:16px;
+  background:var(--white); border:1px solid var(--border-light);
+  transition:transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  overflow:hidden; flex: 1; display: flex;
+}
+.age-modecard::before {
+  content:""; position:absolute; left:0; top:0; width:4px; height:100%;
+  background:linear-gradient(180deg, var(--navy), var(--gold));
+}
+.age-modecard:hover { transform:translateX(5px); box-shadow:0 10px 36px rgba(26,37,88,0.10); border-color:rgba(201,168,76,0.3); }
+
+.age-modecard-content { display:flex; align-items:center; gap:18px; padding:24px; width: 100%; }
+.age-modecard-icon-holder {
+  width:50px; height:50px; min-width:50px; border-radius:12px;
+  background:var(--gold-light); display:flex; align-items:center; justify-content:center;
+  transition:background 0.3s, transform 0.3s;
+}
+.age-modecard:hover .age-modecard-icon-holder { background:var(--navy); transform:rotate(6deg) scale(1.1); }
+.age-modecard-icon { font-size:20px; color:var(--navy); transition:color 0.3s; }
+.age-modecard:hover .age-modecard-icon { color:var(--white); }
+.age-modecard-text-holder { flex: 1; }
+.age-modecard-heading { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:700; color:var(--navy); margin-bottom:4px; }
+.age-modecard-paragraph { line-height:1.85; color:var(--text-muted); font-size:1.05rem; }
+
+/* ══════════════════════════════════
+   WHY CHOOSE US (REASON CARDS)
+   ══════════════════════════════════ */
+.age-reasons-grid {
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:44px 22px;
+  margin-top:32px;
+  align-items: stretch;
+}
+
+.age-whycard {
+  position:relative;
+  display:flex; flex-direction:column; align-items:center;
+  padding:52px 28px 44px;
+  border-radius:24px;
+  border:2px solid var(--border-light);
+  background:var(--white);
+  width: 100%;
+  height: 100%;
+  transition:background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+  cursor:default;
+  text-align:center;
+}
+.age-whycard:hover {
+  background:var(--gold);
+  border-color:var(--gold);
+  transform:translateY(-6px);
+  box-shadow:0 20px 48px rgba(201,168,76,0.30), 0 6px 16px rgba(201,168,76,0.18);
+}
+
+/* Specific highlight treatment for the first card (Zero Consultancy Cost) */
+.age-reasons-grid > div:first-child .age-whycard {
+  background: var(--gold-light);
+  border-color: rgba(201, 168, 76, 0.4);
+  box-shadow: 0 10px 30px rgba(201, 168, 76, 0.08);
+}
+.age-reasons-grid > div:first-child .age-whycard .age-whycard-title {
+  color: var(--navy-light);
+  font-weight: 800;
+}
+.age-reasons-grid > div:first-child .age-whycard .age-whycard-icon-badge {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+.age-reasons-grid > div:first-child .age-whycard .age-whycard-icon {
+  color: var(--gold);
+}
+
+/* Ensure the standard hover action behaves perfectly on the highlighted card */
+.age-reasons-grid > div:first-child .age-whycard:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+.age-reasons-grid > div:first-child .age-whycard:hover .age-whycard-title {
+  color: var(--white);
+}
+.age-reasons-grid > div:first-child .age-whycard:hover .age-whycard-icon-badge {
+  background: var(--white);
+  border-color: var(--white);
+}
+
+.age-whycard-icon-badge {
+  position:absolute;
+  top:-28px; left:50%; transform:translateX(-50%);
+  width:56px; height:56px; border-radius:50%;
+  background:var(--gold-light);
+  border:2px solid var(--border-light);
+  display:flex; align-items:center; justify-content:center;
+  transition:background 0.4s, border-color 0.4s, transform 0.4s;
+}
+.age-whycard:hover .age-whycard-icon-badge { background:var(--white); border-color:var(--white); transform:translateX(-50%) scale(1.1) rotate(8deg); }
+.age-whycard-icon { font-size:22px; color:var(--gold); }
+.age-whycard-body { flex:1; display: flex; flex-direction: column; justify-content: flex-start; }
+
+.age-whycard-title { font-family:'Cormorant Garamond',serif; font-size:1.35rem; font-weight:700; color:var(--navy); margin-bottom:10px; transition:color 0.4s; }
+.age-whycard:hover .age-whycard-title { color:var(--white); }
+.age-whycard-text { font-size:1.05rem; line-height:1.85; color:var(--text-muted); transition:color 0.4s; }
+.age-whycard:hover .age-whycard-text { color:rgba(255,255,255,0.90); }
+
+/* ══════════════════════════════════
+   PROCESS SECTION
+   ══════════════════════════════════ */
+.age-process-timeline { max-width:780px; margin:auto; }
+.age-timeline-step { display:grid; grid-template-columns:80px 1fr; gap:30px; }
+.age-timeline-node { display:flex; flex-direction:column; align-items:center; }
+.age-timeline-number {
+  width:54px; height:54px; border-radius:50%;
+  background:var(--navy); color:var(--gold);
+  display:flex; align-items:center; justify-content:center;
+  font-weight:700; font-size:14px;
+  border:2px solid rgba(201,168,76,0.3);
+  transition:background 0.35s, border-color 0.35s, transform 0.35s;
+}
+.age-timeline-step:hover .age-timeline-number { background:var(--gold); color:var(--navy); border-color:var(--gold); transform:scale(1.1); }
+.age-timeline-connector { width:2px; flex:1; min-height:55px; background:linear-gradient(180deg,var(--gold) 0%,var(--border-light) 100%); margin:6px 0; }
+.age-timeline-content { padding-bottom:40px; }
+.age-timeline-title { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:700; color:var(--navy); margin-bottom:8px; transition:color 0.3s; }
+.age-timeline-step:hover .age-timeline-title { color:var(--gold); }
+.age-timeline-desc { line-height:1.85; color:var(--text-muted); font-size:1.05rem; }
+
+/* ══════════════════════════════════
+   CTA BANNER SECTION
+   ══════════════════════════════════ */
+.age-cta-banner-section {
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 60%,#2a3a80 100%);
+  padding:90px 20px; text-align:center; position:relative; overflow:hidden;
+}
+.age-cta-banner-section::before {
+  content:""; position:absolute; top:-80px; left:50%; transform:translateX(-50%);
+  width:600px; height:600px;
+  background:radial-gradient(circle,rgba(201,168,76,0.15) 0%,transparent 70%);
+  pointer-events:none;
+}
+.age-cta-title { font-family:'Cormorant Garamond',serif; font-size:52px; color:var(--white); margin-bottom:16px; }
+.age-cta-title em { color:var(--gold); font-style:normal; }
+.age-cta-subtitle { max-width:680px; margin:0 auto 36px; line-height:1.85; color:rgba(255,255,255,0.78); font-size:1.1rem; }
+.age-cta-actions { display:flex; justify-content:center; gap:16px; flex-wrap:wrap; }
+.age-cta-button {
+  display:inline-flex; align-items:center; gap:10px;
+  padding:14px 30px; border-radius:10px; text-decoration:none;
+  font-weight:600; font-size:15px;
+  transition:transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+.age-cta-button:hover { transform:translateY(-3px); }
+.age-btn-icon-spacing { transition:transform 0.35s ease; }
+.age-cta-button:hover .age-btn-icon-spacing { transform:scale(1.2) rotate(-5deg); }
+.age-btn-primary { background:var(--gold); color:var(--navy); }
+.age-btn-primary:hover { background:var(--gold-hover); box-shadow:0 10px 30px rgba(201,168,76,0.4); }
+.age-btn-secondary {
+  background:rgba(255,255,255,0.12); color:var(--white);
+  border:1.5px solid rgba(255,255,255,0.35); backdrop-filter:blur(6px);
+}
+.age-btn-secondary:hover { background:rgba(255,255,255,0.22); box-shadow:0 10px 30px rgba(0,0,0,0.2); }
+
+/* ── RESPONSIVE QUERY BRAKES ── */
+@media (max-width:992px) {
+  .age-offers-grid, .age-reasons-grid { grid-template-columns:1fr 1fr; }
+  .age-split-grid, .age-intro-grid { grid-template-columns:1fr; gap: 40px; }
+  .age-image-stack-wrapper { height:380px; }
+}
+@media (max-width:768px) {
+  .age-offers-grid, .age-reasons-grid { grid-template-columns:1fr; }
+  .age-main-heading { font-size:40px; }
+  .age-section-title { font-size:32px; }
+  .age-layout-container { padding:0 20px; }
+  .age-bencard-content, .age-modecard-content { flex-direction:row; align-items:center; gap:16px; }
+}
+@media (max-width:480px) {
+  .age-main-heading { font-size:34px; }
+  .age-cta-title { font-size:34px; }
+  .age-bencard-content, .age-modecard-content { flex-direction:column; align-items:flex-start; gap:12px; }
+}

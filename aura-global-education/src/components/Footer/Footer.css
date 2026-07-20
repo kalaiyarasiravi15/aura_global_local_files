@@ -1,0 +1,271 @@
+/* ==========================================================================
+   AURA GLOBAL — FOOTER DESIGN SYSTEM
+   ========================================================================== */
+.aura-footer {
+  --bg-dark-navy:    #0b122c;
+  --bg-footer-card:  #111a3e;
+  --gold:            #c9a84c;
+  --gold-hover:      #e0bc5a;
+  --white:           #ffffff;
+  --text-muted:      #9cb0cb;
+  --text-light:      rgba(255,255,255,0.9);
+  --border-navy:     rgba(255,255,255,0.08);
+  --transition-fast: 0.22s ease;
+
+  background-color: var(--bg-dark-navy);
+  color: var(--white);
+  font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+}
+
+/* ── MAIN GRID ─────────────────────────────────────────────────────────── */
+.aura-footer-main {
+  padding: 80px 8% 60px;
+}
+
+.aura-footer-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr 1.1fr 1.1fr;
+  gap: 48px;
+}
+
+.aura-footer-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── ROUND CIRCLE LOGO (matches Login page style) ──────────────────────── */
+.footer-logo-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid rgba(201, 168, 76, 0.65);
+  background: rgba(201, 168, 76, 0.08);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-bottom: 22px;
+  box-shadow:
+    0 0 0 6px rgba(201, 168, 76, 0.12),
+    0 8px 24px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.footer-logo-circle:hover {
+  box-shadow:
+    0 0 0 8px rgba(201, 168, 76, 0.2),
+    0 12px 32px rgba(0, 0, 0, 0.4);
+  border-color: rgba(201, 168, 76, 0.9);
+}
+
+.footer-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+/* ── BRAND TEXT ────────────────────────────────────────────────────────── */
+.aura-footer-logo {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2.2rem;
+  color: var(--white);
+  font-weight: 700;
+  margin-bottom: 18px;
+  letter-spacing: 0.5px;
+}
+.aura-footer-logo span {
+  color: var(--gold);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.aura-brand-desc {
+  color: var(--text-muted);
+  font-size: 0.94rem;
+  line-height: 1.7;
+  margin-bottom: 26px;
+}
+
+/* ── SOCIAL ICONS ──────────────────────────────────────────────────────── */
+.aura-social-links {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.social-icon-circle {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background-color: var(--bg-footer-card);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  text-decoration: none;
+  border: 1.5px solid var(--border-navy);
+  transition: all var(--transition-fast);
+}
+.social-icon-circle:hover {
+  background-color: var(--gold);
+  color: var(--bg-dark-navy);
+  transform: translateY(-3px);
+  border-color: var(--gold);
+}
+
+/* ── COLUMN HEADINGS ───────────────────────────────────────────────────── */
+.aura-col-heading {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 24px;
+  position: relative;
+  letter-spacing: 0.5px;
+}
+.aura-col-heading::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 28px;
+  height: 2px;
+  background-color: var(--gold);
+  border-radius: 2px;
+}
+
+/* ── NAV LINKS ─────────────────────────────────────────────────────────── */
+.aura-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.aura-footer-links li {
+  margin-bottom: 12px;
+}
+.aura-footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.93rem;
+  transition: color var(--transition-fast), padding-left var(--transition-fast);
+  display: inline-block;
+}
+.aura-footer-links a:hover {
+  color: var(--gold);
+  padding-left: 5px;
+}
+
+/* ── CONTACT DETAILS ───────────────────────────────────────────────────── */
+.aura-contact-details {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.aura-contact-details li {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  margin-bottom: 16px;
+}
+
+.contact-icon {
+  color: var(--gold);
+  font-size: 1.35rem;
+  margin-top: 4px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  filter: drop-shadow(0 0 2px rgba(201,168,76,0.4));
+}
+.contact-icon--map {
+  font-size: 1.5rem;
+}
+
+.contact-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.contact-label {
+  font-size: 0.75rem;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+.contact-text a,
+.contact-text span {
+  color: var(--text-muted);
+  font-size: 0.93rem;
+  text-decoration: none;
+  line-height: 1.5;
+  transition: color var(--transition-fast);
+}
+.contact-text a:hover {
+  color: var(--gold);
+}
+
+/* ── BOTTOM BAR ────────────────────────────────────────────────────────── */
+.aura-footer-bottom {
+  border-top: 1px solid var(--border-navy);
+  padding: 28px 8%;
+}
+.aura-bottom-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.copyright-text {
+  color: rgba(255,255,255,0.38);
+  font-size: 0.86rem;
+}
+.developer-text {
+  color: rgba(255,255,255,0.38);
+  font-size: 0.86rem;
+}
+.developer-text a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color var(--transition-fast);
+}
+.developer-text a:hover {
+  color: var(--gold-hover);
+  text-decoration: underline;
+}
+
+/* ── RESPONSIVE ────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .aura-footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+@media (max-width: 650px) {
+  .aura-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .aura-footer-main {
+    padding: 56px 6% 40px;
+  }
+  .aura-bottom-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+  .footer-logo-circle {
+    width: 76px;
+    height: 76px;
+  }
+}

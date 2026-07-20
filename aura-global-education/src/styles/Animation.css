@@ -1,0 +1,127 @@
+/* ═══════════════════════════════════════════════════════════
+   AURA GLOBAL — Scroll Reveal Animation System
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Base: all reveal elements start hidden ── */
+.reveal-fade-up,
+.reveal-fade-down,
+.reveal-fade-left,
+.reveal-fade-right,
+.reveal-scale,
+.reveal-rotate,
+.reveal-blur,
+.reveal-clip-up,
+.reveal-stagger > * {
+  opacity: 0;
+  will-change: opacity, transform;
+  transition:
+    opacity  0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    filter   0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Individual transforms before reveal ── */
+.reveal-fade-up    { transform: translateY(40px); }
+.reveal-fade-down  { transform: translateY(-40px); }
+.reveal-fade-left  { transform: translateX(-50px); }
+.reveal-fade-right { transform: translateX(50px); }
+.reveal-scale      { transform: scale(0.88); }
+.reveal-rotate     { transform: rotate(-4deg) translateY(30px); }
+.reveal-blur       { filter: blur(8px); transform: translateY(20px); }
+
+/* Clip path reveal (curtain lift) */
+.reveal-clip-up {
+  clip-path: inset(100% 0 0 0);
+  opacity: 1;
+  transition: clip-path 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Stagger children ── */
+.reveal-stagger > * {
+  transform: translateY(32px);
+}
+.reveal-stagger.is-revealed > * {
+  opacity: 1;
+  transform: none;
+}
+.reveal-stagger.is-revealed > *:nth-child(1)  { transition-delay: 0.05s; }
+.reveal-stagger.is-revealed > *:nth-child(2)  { transition-delay: 0.13s; }
+.reveal-stagger.is-revealed > *:nth-child(3)  { transition-delay: 0.21s; }
+.reveal-stagger.is-revealed > *:nth-child(4)  { transition-delay: 0.29s; }
+.reveal-stagger.is-revealed > *:nth-child(5)  { transition-delay: 0.37s; }
+.reveal-stagger.is-revealed > *:nth-child(6)  { transition-delay: 0.45s; }
+.reveal-stagger.is-revealed > *:nth-child(7)  { transition-delay: 0.53s; }
+.reveal-stagger.is-revealed > *:nth-child(8)  { transition-delay: 0.61s; }
+.reveal-stagger.is-revealed > *:nth-child(9)  { transition-delay: 0.69s; }
+
+/* ── Revealed state ── */
+.reveal-fade-up.is-revealed,
+.reveal-fade-down.is-revealed,
+.reveal-fade-left.is-revealed,
+.reveal-fade-right.is-revealed,
+.reveal-scale.is-revealed,
+.reveal-rotate.is-revealed,
+.reveal-blur.is-revealed {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+.reveal-clip-up.is-revealed {
+  clip-path: inset(0% 0 0 0);
+}
+
+/* ── Custom delays ── */
+.delay-100 { transition-delay: 0.10s !important; }
+.delay-150 { transition-delay: 0.15s !important; }
+.delay-200 { transition-delay: 0.20s !important; }
+.delay-300 { transition-delay: 0.30s !important; }
+.delay-400 { transition-delay: 0.40s !important; }
+.delay-500 { transition-delay: 0.50s !important; }
+.delay-600 { transition-delay: 0.60s !important; }
+.delay-700 { transition-delay: 0.70s !important; }
+.delay-800 { transition-delay: 0.80s !important; }
+
+/* ── Section entrance ── */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition:
+    opacity  0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.section-reveal.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Gold line draw ── */
+.line-draw {
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.line-draw.is-revealed {
+  transform: scaleX(1);
+}
+
+/* ── Respect reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-fade-up,
+  .reveal-fade-down,
+  .reveal-fade-left,
+  .reveal-fade-right,
+  .reveal-scale,
+  .reveal-rotate,
+  .reveal-blur,
+  .reveal-clip-up,
+  .reveal-stagger > *,
+  .section-reveal,
+  .line-draw {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,173 @@
+/* ══════════════════════════════════════════
+   SIDEBAR
+══════════════════════════════════════════ */
+.sa-sidebar {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--navy-dark);
+  color: var(--white);
+  position: sticky;
+  top: 0;
+  overflow: hidden; /* outer wrapper never scrolls */
+}
+
+/* ── Logo section: circle + centered brand name ── */
+.sa-logo-section {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 32px 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sa-logo-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid rgba(201, 168, 76, 0.65);
+  background: rgba(201, 168, 76, 0.08);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 5px rgba(201, 168, 76, 0.12);
+}
+
+.sa-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.sa-brand-name {
+  color: var(--gold-hover);
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* ── Scrollable nav area ── */
+.sa-nav-scroll {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 14px 20px 10px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 168, 76, 0.2) transparent;
+}
+
+.sa-nav-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.sa-nav-scroll::-webkit-scrollbar-thumb {
+  background: rgba(201, 168, 76, 0.2);
+  border-radius: 4px;
+}
+
+/* ── Nav links ── */
+.sa-nav {
+  display: grid;
+  gap: 4px;
+}
+
+.sa-nav a {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 14px;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.sa-nav a svg {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.sa-nav a.active,
+.sa-nav a:hover {
+  background: rgba(201, 168, 76, 0.16);
+  color: var(--gold-hover);
+}
+
+/* ── Footer — always visible at bottom ── */
+.sa-sidebar-footer {
+  flex-shrink: 0;
+  display: grid;
+  gap: 12px;
+  padding: 16px 20px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--navy-dark);
+}
+
+.sa-admin-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.sa-admin-avatar {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(201, 168, 76, 0.18);
+  color: var(--gold-hover);
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sa-admin-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  margin: 0;
+}
+
+.sa-admin-role {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 2px 0 0;
+}
+
+.sa-logout {
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  border-radius: 8px;
+  background: rgba(201, 168, 76, 0.12);
+  color: var(--gold-hover);
+  font-weight: 800;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.sa-logout:hover {
+  background: rgba(201, 168, 76, 0.24);
+}
+
+.sa-logout svg {
+  font-size: 18px;
+}

@@ -1,0 +1,26 @@
+/* Global layout: keep admin panel fixed (no page scroll) */
+html, body, #root {
+	height: 100%;
+	margin: 0;
+	/* overflow: hidden; */
+	/* font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; */
+}
+
+/* Pages with sidebar: ensure full viewport height and two-column layout */
+.sa-page, .dashboard-page, .services-page, .banner-page, .inbox-page, .studies-abroad-page {
+	height: 100vh;
+	display: grid;
+	grid-template-columns: var(--sa-sidebar-w, 272px) 1fr;
+	overflow: hidden;
+}
+
+/* Main content areas scroll internally */
+.sa-main, .dashboard-main, .services-main, .banner-main, .inbox-main {
+	height: 100vh;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+/* Ensure Sidebar (shared) occupies full height and doesn't scroll */
+.sa-sidebar { height: 100vh; position: sticky; top: 0; overflow: hidden; }
+
